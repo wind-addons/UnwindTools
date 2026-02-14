@@ -24,6 +24,7 @@ ignore:
   - .gitmodules
   - .luacheckrc
   - .luarc.json
+  - .styluaignore
   - Core/Type.lua
   - README.md
   - README_zhCN.md
