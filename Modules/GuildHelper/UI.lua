@@ -9,7 +9,12 @@ M.UI = {}
 
 function M.UpdateTitle()
 	if not M.UI.Title then
-		local frame = CreateFrame("Button", E.name .. "GuildHelperTitle", UIParent, "TooltipBorderBackdropTemplate") --[[@as Frame]]
+		local frame = CreateFrame(
+			"Button",
+			E.name .. "GuildHelperTitle",
+			UIParent,
+			"TooltipBorderBackdropTemplate, BackdropTemplate"
+		) --[[@as Frame]]
 		frame:SetBackdropColor(0, 0, 0, 0.68)
 		frame:SetSize(M.profile.ui.general.width, M.profile.ui.title.height)
 		frame:SetPoint("CENTER", UIParent, "CENTER", 200, 0)
@@ -48,7 +53,12 @@ end
 
 function M.UpdateContainer()
 	if not M.UI.Container then
-		local frame = CreateFrame("Frame", E.name .. "GuildHelperContainer", UIParent, "TooltipBorderBackdropTemplate") --[[@as Frame]]
+		local frame = CreateFrame(
+			"Frame",
+			E.name .. "GuildHelperContainer",
+			UIParent,
+			"TooltipBorderBackdropTemplate, BackdropTemplate"
+		) --[[@as Frame]]
 		frame:SetBackdropColor(0, 0, 0, 0.68)
 		S:Frame(frame, { template = "Transparent", shadow = true })
 

@@ -32,6 +32,7 @@ function M:OnInitialize()
 	self:Debug("Skinner: OnInitialize")
 	self:InitializeElvUISkinner()
 	self:InitializeWindToolsSkinner()
+	self:InitializeNDuiSkinner()
 
 	local skinnerID = E.db.global.general.skinner or "None"
 

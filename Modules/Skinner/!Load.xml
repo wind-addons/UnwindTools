@@ -2,7 +2,7 @@
     <Script file="Module.lua" />
     <Script file="ElvUI.lua" />
     <Script file="WindTools.lua" />
-    <!-- <Script file="NDui.lua" /> -->
+    <Script file="NDui.lua" />
     <Script file="Defaults.lua" />
     <Script file="Setting.lua" />
 </Ui>
