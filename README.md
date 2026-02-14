@@ -1,6 +1,6 @@
 <div align="center">
 
-<img width="512" alt="Title" src="https://raw.githubusercontent.com/wind-addons/resources/main/dist/addons/unwind-tools/logo.svg"/>
+<img width="512" alt="Title" src="https://raw.githubusercontent.com/wind-addons/resources/main/dist/addons/unwindtools/logo.svg"/>
 
 English | [简体中文](README_zhCN.md)
 
