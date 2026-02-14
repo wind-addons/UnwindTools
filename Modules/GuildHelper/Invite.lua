@@ -21,8 +21,8 @@ local Manager = {
 	Button = nil,
 	ButtonTitle = L["Invite"],
 	ButtonValueColorTemplate = "amber-500",
-	Template = [[/run print("invite %s")]],
-	-- Template = [[/ginvite %s]],
+	-- Template = [[/run print("invite %s")]],
+	Template = [[/ginvite %s]],
 	CallbackMessage = "GHINVCLK",
 }
 

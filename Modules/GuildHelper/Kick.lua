@@ -17,8 +17,8 @@ local Manager = {
 	Button = nil,
 	ButtonTitle = L["Kick"],
 	ButtonValueColorTemplate = "cyan-500",
-	Template = [[/run print("kick %s")]],
-	-- Template = [[/gremove %s]],
+	-- Template = [[/run print("kick %s")]],
+	Template = [[/gremove %s]],
 	CallbackMessage = "GHKICKCLK",
 }
 
