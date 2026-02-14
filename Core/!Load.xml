@@ -1,0 +1,18 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Script file="Initialize.lua" />
+
+    <Script file="Functions\Table.lua" />
+    <Script file="Functions\Validator.lua" />
+    <Script file="Functions\Font.lua" />
+    <Script file="Functions\Async.lua" />
+    <Script file="Functions\Task.lua" />
+    <Script file="Functions\Color.lua" />
+    <Script file="Functions\Logger.lua" />
+    <Script file="Functions\Mover.lua" />
+
+    <Script file="Core.lua" />
+    <Script file="API.lua" />
+    <Script file="Database.lua" />
+    <Script file="Setting.lua" />
+    <Script file="Defaults.lua" />
+</Ui>

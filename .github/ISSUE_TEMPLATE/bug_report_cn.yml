@@ -1,0 +1,45 @@
+name: 🐛 Bug 反馈
+description: 反馈 Unwind 工具箱中的错误。
+title: "bug: "
+labels: ["🐛 Bug"]
+type: bug
+body:
+  - type: checkboxes
+    attributes:
+      label: 提交前请检查以下项目
+      description: 在提交问题前请确保已检查以下所有项目
+      options:
+        - label: 我已在提交此问题前将 `Unwind 工具箱` 更新至最新版本
+          required: true
+        - label: 我根本没看这些确认步骤，请直接关闭我的问题
+          required: false
+        - label: 我已在此前禁用其他全部插件测试过此问题
+          required: true
+  - type: input
+    attributes:
+      label: "Unwind 工具箱版本"
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 描述错误
+      description: 清楚简洁地描述遇到的错误。请包含在 BugSack 中看到的任何相关错误信息。
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 复现步骤
+      description: 复现该错误的步骤。
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 预期行为
+      description: 简洁描述你期望发生的行为。
+    validations:
+      required: true

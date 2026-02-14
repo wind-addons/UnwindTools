@@ -1,0 +1,31 @@
+package-as: UnwindTools
+
+externals:
+  Libraries/Ace3:
+    url: https://repos.wowace.com/wow/ace3/trunk
+    type: svn
+  Libraries/LibDBIcon-1.0:
+    url: https://repos.wowace.com/wow/libdbicon-1-0/trunk
+    type: svn
+  Libraries/UTF8:
+    url: https://repos.wowace.com/wow/utf8/trunk
+    type: svn
+  Libraries/LibSharedMedia-3.0:
+    url: https://repos.curseforge.com/wow/libsharedmedia-3-0/trunk
+    type: svn
+  Libraries/AceGUI-3.0-SharedMediaWidgets:
+    url: https://repos.curseforge.com/wow/ace-gui-3-0-shared-media-widgets/trunk
+    type: svn
+
+ignore:
+  - .gitattributes
+  - .github/*
+  - .gitignore
+  - .gitmodules
+  - .luacheckrc
+  - .luarc.json
+  - Core/Type.lua
+  - README.md
+  - README_zhCN.md
+  - README_zhTW.md
+  - stylua.toml

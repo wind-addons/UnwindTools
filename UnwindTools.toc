@@ -1,0 +1,26 @@
+## Interface: 120001
+## Author: fang2hou
+## Version: 0.1.0
+## Title: |cff5485EDU|r|cff528FEBn|r|cff5098E9w|r|cff4EA2E8i|r|cff4CABE6n|r|cff4AB5E4d|r|cff48BCE3T|r|cff47C3E1o|r|cff45C9E0o|r|cff44D0DEl|r|cff42D7DDs|r
+## Title-zhCN: |cff5485EDU|r|cff5290EBn|r|cff509AE9w|r|cff4DA5E7i|r|cff4BB0E5n|r|cff49B9E3d|r|cff47C0E2 |r|cff46C8E0工|r|cff44CFDF具|r|cff42D7DD箱|r
+## Title-zhTW: |cff5485EDU|r|cff5290EBn|r|cff509AE9w|r|cff4DA5E7i|r|cff4BB0E5n|r|cff49B9E3d|r|cff47C0E2 |r|cff46C8E0工|r|cff44CFDF具|r|cff42D7DD箱|r
+## Notes: Some customizable enhancements for World of Warcraft.
+## Notes-zhCN: 一些用于魔兽世界的自定义增强.
+## Notes-zhTW: 一些用於魔獸世界的自訂增強.
+## Category-enUS: Enhancements
+## Category-zhCN: 增强功能
+## Category-zhTW: 增強功能
+## LoadSavedVariablesFirst: 1
+## SavedVariables: UnwindToolsDB
+## AddonCompartmentFunc: UnwindTools_OnAddonCompartmentClick
+## IconTexture: Interface\ICONS\Ability_Ardenweald_Paladin_Winter
+## X-Curse-Project-ID: 1462042
+## X-Wago-ID: x618OxN1
+
+Media\!Load.xml
+Libraries\!Load.xml
+Locales\!Load.xml
+Core\!Load.xml
+
+Modules\Skinner\!Load.xml
+Modules\GuildHelper\!Load.xml
