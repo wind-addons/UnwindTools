@@ -7,9 +7,11 @@
 ## Notes: Some customizable enhancements for World of Warcraft.
 ## Notes-zhCN: 一些用于魔兽世界的自定义增强.
 ## Notes-zhTW: 一些用於魔獸世界的自訂增強.
+## Notes-ruRU: Некоторые пользовательские улучшения для World of Warcraft.
 ## Category-enUS: Enhancements
 ## Category-zhCN: 增强功能
 ## Category-zhTW: 增強功能
+## Category-ruRU: Улучшения
 ## LoadSavedVariablesFirst: 1
 ## SavedVariables: UnwindToolsDB
 ## AddonCompartmentFunc: UnwindTools_OnAddonCompartmentClick
