@@ -13,7 +13,7 @@
 ## LoadSavedVariablesFirst: 1
 ## SavedVariables: UnwindToolsDB
 ## AddonCompartmentFunc: UnwindTools_OnAddonCompartmentClick
-## IconTexture: Interface\ICONS\Ability_Ardenweald_Paladin_Winter
+## IconTexture: Interface\Addons\UnwindTools\Media\Textures\Logo.png
 ## X-Curse-Project-ID: 1462042
 ## X-Wago-ID: x618OxN1
 

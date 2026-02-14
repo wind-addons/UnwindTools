@@ -11,6 +11,7 @@
     <Script file="Functions\Mover.lua" />
 
     <Script file="Core.lua" />
+    <Script file="Texture.lua" />
     <Script file="API.lua" />
     <Script file="Database.lua" />
     <Script file="Setting.lua" />

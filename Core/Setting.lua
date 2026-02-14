@@ -167,7 +167,7 @@ function E:BuildSettings()
 		type = "launcher",
 		text = self.title,
 		label = self.title,
-		icon = [[Interface\ICONS\Ability_Ardenweald_Paladin_Winter]],
+		icon = E.Texture.Logo,
 		OnClick = UnwindTools_OnAddonCompartmentClick,
 		OnTooltipShow = function(tooltip)
 			tooltip:AddLine(self.title)
