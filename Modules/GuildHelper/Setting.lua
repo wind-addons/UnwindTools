@@ -400,7 +400,7 @@ local settings = {
 								order = 1,
 								type = "toggle",
 								name = L["Enable"],
-								desc = L["Only apply kick rules to specified guild guild ranks."],
+								desc = L["Only apply kick rules to specified guild ranks."],
 								get = function()
 									return M.profile.kick.rules.guildRank.enabled
 								end,
