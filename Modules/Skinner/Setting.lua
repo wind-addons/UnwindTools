@@ -1,7 +1,9 @@
 local ns = select(2, ...) ---@type Namespace
 local E, F, L = ns[1], ns[2], ns[3]
 
-local function GetAvailableSkinValues()
+local M = E:Module("Skinner") ---@class Skinner
+
+function M:RefreshConfigurableSkins()
 	local skins = { None = L["None"], Auto = L["Auto"] }
 	local sorting = { "Auto", "None" }
 	if E.isElvUILoaded then
@@ -19,10 +21,8 @@ local function GetAvailableSkinValues()
 		sorting[#sorting + 1] = "NDui"
 	end
 
-	return skins, sorting
+	self.ConfigurableSkins, self.ConfigurableSkinsSorting = skins, sorting
 end
-
-local values, sorting = GetAvailableSkinValues()
 
 E:AddGeneralSettings({
 	skinner = {
@@ -30,8 +30,12 @@ E:AddGeneralSettings({
 		name = L["Skinner"],
 		order = 20,
 		desc = string.format(L["Choose the skinner that will skin the UIs created by %s."], E.title),
-		values = values,
-		sorting = sorting,
+		values = function()
+			return M.ConfigurableSkins
+		end,
+		sorting = function()
+			return M.ConfigurableSkinsSorting
+		end,
 		get = function()
 			return E.db.global.general.skinner
 		end,

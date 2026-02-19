@@ -34,6 +34,8 @@ function M:OnInitialize()
 	self:InitializeWindToolsSkinner()
 	self:InitializeNDuiSkinner()
 
+	self:RefreshConfigurableSkins()
+
 	local skinnerID = E.db.global.general.skinner or "None"
 
 	if skinnerID == "Auto" then
