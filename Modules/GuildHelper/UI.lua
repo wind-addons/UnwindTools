@@ -14,8 +14,7 @@ function M.UpdateTitle()
 			E.name .. "GuildHelperTitle",
 			UIParent,
 			"TooltipBorderBackdropTemplate, BackdropTemplate"
-		) --[[@as Frame]]
-		frame:SetBackdropColor(0, 0, 0, 0.68)
+		) --[[@as BackdropTemplate]]
 		frame:SetSize(M.profile.ui.general.width, M.profile.ui.title.height)
 		frame:SetPoint("CENTER", UIParent, "CENTER", 200, 0)
 		S:Frame(frame, { template = "Transparent", shadow = true })
@@ -58,8 +57,7 @@ function M.UpdateContainer()
 			E.name .. "GuildHelperContainer",
 			UIParent,
 			"TooltipBorderBackdropTemplate, BackdropTemplate"
-		) --[[@as Frame]]
-		frame:SetBackdropColor(0, 0, 0, 0.68)
+		) --[[@as BackdropTemplate]]
 		S:Frame(frame, { template = "Transparent", shadow = true })
 
 		M.UI.Container = frame
