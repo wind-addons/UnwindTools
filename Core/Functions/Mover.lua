@@ -4,6 +4,10 @@ local F = ns[2] ---@class Functions
 ---@class Functions.Mover
 F.Mover = {}
 
+local function IsFrameSafeToMove(frame)
+	return not (frame.IsForbidden and frame:IsForbidden()) and not (frame.IsProtected and frame:IsProtected())
+end
+
 ---@alias MoverSavedID string
 
 ---@class PointData
@@ -91,6 +95,10 @@ local function OnDragStart(self)
 		F.Logger.Error("Cannot start moving frame, no config found. Frame:", self)
 	end
 
+	if IsFrameSafeToMove(config.target) == false then
+		return
+	end
+
 	config.target:StartMoving()
 end
 
@@ -100,6 +108,10 @@ local function OnDragStop(self)
 	local config = F.Mover.Configs[self]
 	if not config then
 		F.Logger.Error("Cannot stop moving frame, no config found. Frame:", self)
+	end
+
+	if IsFrameSafeToMove(config.target) == false then
+		return
 	end
 
 	config.target:StopMovingOrSizing()
