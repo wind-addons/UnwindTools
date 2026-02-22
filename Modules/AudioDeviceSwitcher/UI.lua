@@ -7,25 +7,6 @@ local M = E:Module("Audio Device Switcher") ---@class AudioDeviceSwitcher
 ---@class AudioDeviceSwitcher.UI
 M.UI = {}
 
-function M.UpdateButtonBackdrop()
-	if not M.UI.Button then
-		return
-	end
-
-	local isShown = M.profile.ui.general.transparent
-	local button = M.UI.Button
-
-	if button.__bg then
-		button.__bg:SetShown(isShown)
-	elseif button.backdrop then
-		button.backdrop:SetShown(isShown)
-	elseif button.Left and button.Middle and button.Right then
-		button.Left:SetShown(isShown)
-		button.Middle:SetShown(isShown)
-		button.Right:SetShown(isShown)
-	end
-end
-
 function M.UpdateButton()
 	if not M.UI.Button then
 		local button = CreateFrame("Button", E.name .. "AudioDeviceSwitcherButton", UIParent, "SharedButtonTemplate")
@@ -75,8 +56,6 @@ function M.UpdateButton()
 	button:SetSize(M.profile.ui.general.width, M.profile.ui.general.height)
 	button:SetAlpha(M.profile.ui.general.mouseover and 0 or 1)
 	F.Font.Set(button:GetFontString(), M.profile.ui.font)
-
-	M.UpdateButtonBackdrop()
 end
 
 function M:UpdateButtonText()
