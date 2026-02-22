@@ -26,3 +26,4 @@ Core\!Load.xml
 
 Modules\Skinner\!Load.xml
 Modules\GuildHelper\!Load.xml
+Modules\AudioDeviceSwitcher\!Load.xml

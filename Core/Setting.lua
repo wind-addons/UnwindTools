@@ -13,11 +13,12 @@ function UnwindTools_OnAddonCompartmentClick()
 	LibStub("AceConfigDialog-3.0"):Open(E.name)
 end
 
----@alias SettingCategory "social"
+---@alias SettingCategory "general"|"system"|"social"
 ---@type table<SettingCategory, { order: number, name: string, gradientColorTemplates: ColorTemplate[] }>
 local settingCategories = {
 	general = { order = 0, name = L["General"], gradientColorTemplates = { "emerald-500", "emerald-300" } },
-	social = { order = 1, name = L["Social & Guild"], gradientColorTemplates = { "blue-500", "blue-300" } },
+	system = { order = 1, name = L["System Settings"], gradientColorTemplates = { "amber-500", "amber-300" } },
+	social = { order = 2, name = L["Social & Guild"], gradientColorTemplates = { "blue-500", "blue-300" } },
 }
 
 local settings = {

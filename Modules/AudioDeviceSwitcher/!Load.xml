@@ -1,0 +1,7 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Module.lua" />
+	<Script file="Switcher.lua" />
+	<Script file="Defaults.lua" />
+	<Script file="Setting.lua" />
+	<Script file="UI.lua" />
+</Ui>
