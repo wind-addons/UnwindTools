@@ -19,27 +19,19 @@ English | [简体中文](README_zhCN.md)
 
 ## ✨ Features
 
+UnwindTools is a utility pack I maintain outside WindTools, bringing together WeakAuras I previously shared and a few everyday tools.
+
 ### Guild Helper
 
-A powerful tool for guild management with smart invite and kick functionality.
+Built for officers who need to process invites and cleanup fast, without manual spam.
 
-#### Invite
-- **Community Channel Monitoring**: Automatically monitors specified community channels for new messages
-- **Customizable Channels**: Configure which community channels to monitor
-- **Batch Invites**: Invite up to 5 players at once with a single click
+It keeps invites and cleanup in one workflow: watch selected community channels and batch-invite players, then build a rule-based kick list and execute removals after review. The flow is designed to stay fast without losing control, so regular maintenance takes less effort while accidental removals are less likely.
 
-#### Kick
-- **Rule-Based Member Cleanup**: Define flexible rules to identify members for removal
-  - **Guild Rank**: Target specific guild ranks for cleanup
-  - **Level Range**: Remove members within configurable level ranges
-  - **Long Offline**: Kick members offline for more than specified hours
-  - **Note Mark**: Pattern matching (with regex support) on public/officer notes
-- **Protection Rules**: Safeguard important members from accidental removal
-  - Protect members with public notes
-  - Protect members with officer notes
-  - Protect specific guild ranks
-- **Refresh & Review**: Recalculate kick list and review targets before action
-- **Batch Kicks**: Remove up to 5 members per click with confirmation tooltips
+### Audio Device Switcher
+
+Made for players who frequently switch between speakers, headset, or stream setup.
+
+It gives you two practical modes: auto mode tries to reset WoW audio back to your primary device when system devices change, while manual mode lets you define regex-based device rules and cycle through matched outputs with one button. In practice, it does more than simple switching—it also helps recover from device drift during real gameplay.
 
 ## 📜 License
 
