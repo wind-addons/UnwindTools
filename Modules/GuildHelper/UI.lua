@@ -40,7 +40,7 @@ function M.UpdateTitle()
 			M.UI.Container:SetShown(not M.UI.Container:IsShown())
 		end)
 
-		F.Mover.New(frame, { id = "GuildHelperTitleBar" })
+		F.Mover.New(frame, { enabled = not M.profile.ui.general.lock, id = "GuildHelperTitleBar" })
 		F.Mover.Restore(frame)
 
 		M.UI.Title = frame

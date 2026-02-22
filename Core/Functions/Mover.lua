@@ -5,7 +5,9 @@ local F = ns[2] ---@class Functions
 F.Mover = {}
 
 local function IsFrameSafeToMove(frame)
-	return not (frame.IsForbidden and frame:IsForbidden()) and not (frame.IsProtected and frame:IsProtected())
+	local isProtected = frame.IsProtected and frame:IsProtected()
+	local inCombat = InCombatLockdown()
+	return not (isProtected and inCombat)
 end
 
 ---@alias MoverSavedID string
@@ -20,6 +22,7 @@ end
 ---@alias MovableObject Frame | Button
 
 ---@class MoverConfig
+---@field enabled boolean
 ---@field id MoverSavedID
 ---@field target MovableObject
 
@@ -95,7 +98,7 @@ local function OnDragStart(self)
 		F.Logger.Error("Cannot start moving frame, no config found. Frame:", self)
 	end
 
-	if IsFrameSafeToMove(config.target) == false then
+	if not config.enabled or not IsFrameSafeToMove(config.target) then
 		return
 	end
 
@@ -110,7 +113,7 @@ local function OnDragStop(self)
 		F.Logger.Error("Cannot stop moving frame, no config found. Frame:", self)
 	end
 
-	if IsFrameSafeToMove(config.target) == false then
+	if not config.enabled or not IsFrameSafeToMove(config.target) then
 		return
 	end
 
@@ -121,7 +124,7 @@ end
 
 ---Set the frame to be movable, and create the auto save.
 ---@param frame Frame | Button the frame to make movable
----@param options { id: string, target?: string | MovableObject }
+---@param options { enabled: boolean, id: string, target?: string | MovableObject } the mover options
 function F.Mover.New(frame, options)
 	assert(type(options) == "table", "options must be a table")
 
@@ -136,7 +139,7 @@ function F.Mover.New(frame, options)
 		)
 	end
 
-	F.Mover.Configs[frame] = { id = options.id, target = target }
+	F.Mover.Configs[frame] = { enabled = options.enabled, id = options.id, target = target }
 
 	target:SetMovable(true)
 	frame:EnableMouse(true)
@@ -162,4 +165,17 @@ function F.Mover.Restore(frame)
 
 	frame:ClearAllPoints()
 	frame:SetPoint(state.point, _G[state.relativeTo], state.relativePoint, state.x, state.y)
+end
+
+---Locks or unlocks the frame from being moved.
+---@param frame MovableObject the frame to lock or unlock
+---@param movable boolean whether the frame should be locked or unlocked
+function F.Mover.SetMovable(frame, movable)
+	local config = F.Mover.Configs[frame]
+	if not config then
+		F.Logger.Error("Cannot set movable, no config found. Frame:", frame)
+		return
+	end
+
+	config.enabled = movable
 end

@@ -5,15 +5,7 @@ local M = E:Module("Audio Device Switcher") ---@class AudioDeviceSwitcher: WindM
 M:SetCategory("system"):SetTitle(L["Audio Device Switcher"]):SetID("audioDeviceSwitcher")
 
 function M:OnInitialize()
-	if self._hasSoundSystemHook then
-		return
-	end
-
-	hooksecurefunc("Sound_GameSystem_RestartSoundSystem", function()
-		self:UpdateButtonText()
-	end)
-
-	self._hasSoundSystemHook = true
+	self.RebuildDeviceSettings()
 end
 
 function M:OnEnable()
@@ -37,6 +29,7 @@ function M:OnDisable()
 end
 
 function M:OnProfileChanged()
+	self.RebuildDeviceSettings()
 	self:UpdateUI()
 end
 
@@ -51,6 +44,6 @@ function M:CVAR_UPDATE(_, cvarName)
 	end
 
 	RunNextFrame(function()
-        self:UpdateButtonText()
-    end)
+		self:UpdateButtonText()
+	end)
 end

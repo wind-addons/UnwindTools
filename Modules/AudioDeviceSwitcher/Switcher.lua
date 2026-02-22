@@ -30,8 +30,7 @@ function M:GetConfiguredDevices()
 	local configured = {}
 	local usedDriverIndices = {}
 
-	for index = 1, 5 do
-		local db = self.profile["device" .. index]
+	for _, db in ipairs(self.profile.devices or {}) do
 		if
 			db
 			and db.enable
@@ -39,8 +38,8 @@ function M:GetConfiguredDevices()
 			and F.Validator.IsNonEmptyString(db.displayName)
 		then
 			for driverIndex, deviceName in pairs(allDevices) do
-				local isMatched = string.find(string.lower(deviceName), string.lower(db.pattern), 1, true)
-				if isMatched and not usedDriverIndices[driverIndex] then
+				local ok, matched = pcall(string.match, deviceName, db.pattern)
+				if ok and matched and not usedDriverIndices[driverIndex] then
 					usedDriverIndices[driverIndex] = true
 					table.insert(configured, {
 						cvarIndex = driverIndex,

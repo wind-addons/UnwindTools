@@ -1,6 +1,10 @@
 local ns = select(2, ...) ---@type Namespace
 local E, F, L = ns[1], ns[2], ns[3]
 
+local M = E:Module("Audio Device Switcher") ---@class AudioDeviceSwitcher: WindModule
+
+M.defaultDeviceSetting = { enable = false, pattern = "", displayName = "" }
+
 ---@class AudioDeviceSwitcher
 local defaults = {
 	profile = {
@@ -9,9 +13,10 @@ local defaults = {
 			general = {
 				width = 120,
 				height = 30,
-				buttonBackdrop = true,
+				transparent = true,
 				mouseover = false,
 				showTooltip = true,
+				lock = false,
 			},
 			font = {
 				name = F.Font.DefaultName,
@@ -19,31 +24,7 @@ local defaults = {
 				height = 13,
 			},
 		},
-		device1 = {
-			enable = false,
-			pattern = "",
-			displayName = "",
-		},
-		device2 = {
-			enable = false,
-			pattern = "",
-			displayName = "",
-		},
-		device3 = {
-			enable = false,
-			pattern = "",
-			displayName = "",
-		},
-		device4 = {
-			enable = false,
-			pattern = "",
-			displayName = "",
-		},
-		device5 = {
-			enable = false,
-			pattern = "",
-			displayName = "",
-		},
+		devices = { M.defaultDeviceSetting },
 	},
 }
 

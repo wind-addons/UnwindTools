@@ -3,6 +3,11 @@ local E = ns[1] ---@class Engine
 local F = ns[2]
 local L = ns[3]
 
+local ACD = LibStub("AceConfigDialog-3.0")
+local ACR = LibStub("AceConfigRegistry-3.0")
+local ADO = LibStub("AceDBOptions-3.0")
+local DBI = LibStub("LibDBIcon-1.0")
+local LDB = LibStub("LibDataBroker-1.1")
 local LSM = LibStub("LibSharedMedia-3.0")
 
 ---@cast E Engine
@@ -10,7 +15,7 @@ local LSM = LibStub("LibSharedMedia-3.0")
 
 ---Open the setting panel from the addon compartment click
 function UnwindTools_OnAddonCompartmentClick()
-	LibStub("AceConfigDialog-3.0"):Open(E.name)
+	ACD:Open(E.name)
 end
 
 ---@alias SettingCategory "general"|"system"|"social"
@@ -157,14 +162,14 @@ function E:AddGeneralSettings(generalSettings, subGroup, options)
 end
 
 function E:BuildSettings()
-	settings.args.profiles = LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db)
+	settings.args.profiles = ADO:GetOptionsTable(self.db)
 	settings.args.profiles.order = 1000
 
-	LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable(self.name, settings)
-	LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable(self.name .. "BlizOptions", blizOptions)
-	LibStub("AceConfigDialog-3.0"):AddToBlizOptions(self.name .. "BlizOptions", self.title)
+	ACR:RegisterOptionsTable(self.name, settings)
+	ACR:RegisterOptionsTable(self.name .. "BlizOptions", blizOptions)
+	ACD:AddToBlizOptions(self.name .. "BlizOptions", self.title)
 
-	local launcher = LibStub("LibDataBroker-1.1"):NewDataObject(self.name, {
+	local launcher = LDB:NewDataObject(self.name, {
 		type = "launcher",
 		text = self.title,
 		label = self.title,
@@ -176,7 +181,11 @@ function E:BuildSettings()
 		end,
 	})
 
-	LibStub("LibDBIcon-1.0"):Register(self.name, launcher, self.db.global.general.minimapIcon)
+	DBI:Register(self.name, launcher, self.db.global.general.minimapIcon)
+end
+
+function E:RefreshSettings()
+	ACR:NotifyChange(self.name)
 end
 
 ---@class FontSettingOptions
@@ -312,15 +321,9 @@ function E:SetStringListSetting(args, getConfigTable)
 	end
 end
 
-
 ---Creates a simple divider for the settings panel.
----@param order number The order of the divider in the settings panel
+---@param order? number The order of the divider in the settings panel
 ---@return table The settings table for the divider
 function E:GetSimpleDivider(order)
-	return {
-		type = "description",
-		name = "",
-		order = order,
-		width = "full",
-	}
+	return { type = "description", name = "", order = order, width = "full" }
 end

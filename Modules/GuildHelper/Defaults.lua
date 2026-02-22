@@ -10,6 +10,7 @@ local defaults = {
 				width = 150,
 				spacingBetweenElements = 4,
 				showTooltip = true,
+				lock = false,
 			},
 			title = {
 				height = 30,

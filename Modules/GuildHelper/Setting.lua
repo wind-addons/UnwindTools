@@ -59,6 +59,21 @@ local settings = {
 							M.profile.ui.general.showTooltip = value
 						end,
 					},
+					lock = {
+						order = 4,
+						type = "toggle",
+						name = L["Lock"],
+						desc = L["Lock the UI in place."],
+						get = function()
+							return M.profile.ui.general.lock
+						end,
+						set = function(_, value)
+							M.profile.ui.general.lock = value
+							if M.UI.Title then
+								F.Mover.SetMovable(M.UI.Title, not value)
+							end
+						end,
+					},
 				},
 			},
 			title = {

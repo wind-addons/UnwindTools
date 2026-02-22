@@ -7,14 +7,12 @@ local M = E:Module("Audio Device Switcher") ---@class AudioDeviceSwitcher
 ---@class AudioDeviceSwitcher.UI
 M.UI = {}
 
-
-
 function M.UpdateButtonBackdrop()
 	if not M.UI.Button then
 		return
 	end
 
-	local isShown = M.profile.ui.general.buttonBackdrop
+	local isShown = M.profile.ui.general.transparent
 	local button = M.UI.Button
 
 	if button.__bg then
@@ -55,7 +53,6 @@ function M.UpdateButton()
 			GameTooltip:SetOwner(self, "ANCHOR_TOP", 0, 4)
 			GameTooltip:AddLine(L["Audio Device Switcher"])
 			GameTooltip:AddLine(L["Click to switch to the next configured device."], 1, 1, 1, true)
-			GameTooltip:AddLine(string.format("%s: %s", L["Current Device"], M:GetCurrentDeviceName()), 0.75, 0.9, 1)
 			GameTooltip:Show()
 		end)
 
@@ -68,7 +65,7 @@ function M.UpdateButton()
 
 		S:Button(button, { template = "Default", shadow = true })
 
-		F.Mover.New(button, { id = "AudioDeviceSwitcherButton" })
+		F.Mover.New(button, { enabled = not M.profile.ui.general.lock, id = "AudioDeviceSwitcherButton" })
 		F.Mover.Restore(button)
 
 		M.UI.Button = button
@@ -99,6 +96,10 @@ function M:UpdateButtonVisibility()
 end
 
 function M:UpdateUI()
+	if not self:IsHooked("Sound_GameSystem_RestartSoundSystem") then
+		self:SecureHook("Sound_GameSystem_RestartSoundSystem", "UpdateButtonText")
+	end
+
 	self.UpdateButton()
 	self:UpdateButtonVisibility()
 	self:UpdateButtonText()
