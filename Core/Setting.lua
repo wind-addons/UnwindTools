@@ -77,7 +77,7 @@ function E:AddSettings(settingCategory, moduleName, moduleID, moduleTitle, modul
 		childGroups = "tab",
 		args = {
 			enabled = {
-				order = -2,
+				order = 1,
 				type = "toggle",
 				name = L["Enable"],
 				desc = L["Enable or disable %s."]:format(F.Color.String(moduleTitle, "blue-500")),
@@ -103,7 +103,7 @@ function E:AddSettings(settingCategory, moduleName, moduleID, moduleTitle, modul
 				end,
 			},
 			resetSetting = {
-				order = -1,
+				order = 2,
 				type = "execute",
 				name = L["Reset Settings"],
 				desc = L["Reset all settings for %s to default values."]:format(
@@ -310,4 +310,17 @@ function E:SetStringListSetting(args, getConfigTable)
 			end
 		end
 	end
+end
+
+
+---Creates a simple divider for the settings panel.
+---@param order number The order of the divider in the settings panel
+---@return table The settings table for the divider
+function E:GetSimpleDivider(order)
+	return {
+		type = "description",
+		name = "",
+		order = order,
+		width = "full",
+	}
 end

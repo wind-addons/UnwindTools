@@ -5,7 +5,7 @@ local M = E:Module("Guild Helper") ---@class GuildHelper
 
 local settings = {
 	ui = {
-		order = 1,
+		order = 11,
 		type = "group",
 		name = L["UI"],
 		args = {
@@ -128,7 +128,7 @@ local settings = {
 		},
 	},
 	invite = {
-		order = 2,
+		order = 12,
 		type = "group",
 		name = L["Invite"],
 		args = {
@@ -143,7 +143,7 @@ local settings = {
 		},
 	},
 	kick = {
-		order = 3,
+		order = 13,
 		type = "group",
 		name = L["Kick"],
 		args = {
