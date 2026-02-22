@@ -4,7 +4,7 @@ local E, F, L = ns[1], ns[2], ns[3]
 ---@class GuildHelper
 local defaults = {
 	profile = {
-		enabled = true,
+		enabled = false,
 		ui = {
 			general = {
 				width = 150,
