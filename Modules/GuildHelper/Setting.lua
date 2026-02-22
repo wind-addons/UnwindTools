@@ -426,7 +426,7 @@ local settings = {
 	},
 }
 
-F.Table.DeepExtend(
+F.Table.Extend(
 	settings.ui.args.title.args,
 	E:GetFontSettings(function()
 		return M.profile.ui.title.font
@@ -438,7 +438,7 @@ F.Table.DeepExtend(
 	})
 )
 
-F.Table.DeepExtend(
+F.Table.Extend(
 	settings.ui.args.button.args,
 	E:GetFontSettings(function()
 		return M.profile.ui.button.font

@@ -123,7 +123,7 @@ function E:AddSettings(settingCategory, moduleName, moduleID, moduleTitle, modul
 		},
 	}
 
-	settings.args[settingCategory].args[moduleID] = F.Table.DeepExtend(
+	settings.args[settingCategory].args[moduleID] = F.Table.Extend(
 		settings.args[settingCategory].args[moduleID] or defaultSetting,
 		{ name = moduleTitle, args = moduleSettings },
 		options or {}
@@ -143,7 +143,7 @@ function E:AddGeneralSettings(generalSettings, subGroup, options)
 		assert(type(subGroup.id) == "string", "Group ID must be a string, got " .. type(subGroup.id))
 		assert(type(subGroup.name) == "string", "Group name must be a string, got " .. type(subGroup.name))
 
-		setting.args[subGroup.id] = F.Table.DeepExtend(setting.args[subGroup.id] or {
+		setting.args[subGroup.id] = F.Table.Extend(setting.args[subGroup.id] or {
 			type = "group",
 			inline = true,
 			order = CountTable(setting.args) + 1,
@@ -153,7 +153,7 @@ function E:AddGeneralSettings(generalSettings, subGroup, options)
 		setting = setting.args[subGroup.id]
 	end
 
-	F.Table.DeepExtend(setting, { args = generalSettings }, options or {})
+	F.Table.Extend(setting, { args = generalSettings }, options or {})
 end
 
 function E:BuildSettings()
@@ -265,7 +265,7 @@ function E:GetFontSettings(configTable, options)
 	}
 
 	if options and options.subOptions then
-		F.Table.DeepExtend(
+		F.Table.Extend(
 			args,
 			{ fontName = options.subOptions, fontStyle = options.subOptions, fontHeight = options.subOptions }
 		)
@@ -280,7 +280,7 @@ function E:GetFontSettings(configTable, options)
 		}
 
 		if options.groupOptions then
-			F.Table.DeepExtend(group, options.groupOptions)
+			F.Table.Extend(group, options.groupOptions)
 		end
 
 		return group

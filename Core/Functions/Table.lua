@@ -10,9 +10,12 @@ F.Table.Actions = {
 }
 
 ---Merges the contents of the source table into the destination table recursively.
+---If dest does not have an existing table at a given key, the source table is
+---assigned by reference directly (no deep copy), which preserves identity for
+---shared/mutable tables such as dynamic settings args.
 ---@param dest table The destination table to merge into
 ---@param ...table The source tables to merge from, the merges are applied in order
-function F.Table.DeepExtend(dest, ...)
+function F.Table.Extend(dest, ...)
 	assert(type(dest) == "table", "dest must be a table")
 
 	for i = 1, select("#", ...) do
@@ -23,7 +26,14 @@ function F.Table.DeepExtend(dest, ...)
 			if value == F.Table.Actions.RemoveField then
 				dest[key] = nil
 			elseif type(value) == "table" then
-				dest[key] = F.Table.DeepExtend(type(dest[key]) == "table" and dest[key] or {}, value)
+				if type(dest[key]) == "table" then
+					-- dest already owns a table here: merge into it
+					F.Table.Extend(dest[key], value)
+				else
+					-- dest has nothing here: assign the reference directly,
+					-- no unnecessary copy
+					dest[key] = value
+				end
 			else
 				dest[key] = value
 			end

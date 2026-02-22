@@ -38,13 +38,13 @@ function E.AddDefaults(moduleID, moduleDefaults)
 	assert(type(moduleDefaults) == "table", "moduleDefaults must be a table")
 
 	if moduleDefaults.profile then
-		F.Table.DeepExtend(defaults, {
+		F.Table.Extend(defaults, {
 			profile = moduleID and { [moduleID] = moduleDefaults.profile } or moduleDefaults.profile,
 		})
 	end
 
 	if moduleDefaults.global then
-		F.Table.DeepExtend(defaults, {
+		F.Table.Extend(defaults, {
 			global = moduleID and { [moduleID] = moduleDefaults.global } or moduleDefaults.global,
 		})
 	end
