@@ -13,6 +13,10 @@ function M:GetAllDeviceNames()
 	local devices = {}
 	local count = Sound_GameSystem_GetNumOutputDrivers()
 
+	if count <= 0 then
+		return devices
+	end
+
 	for index = 1, count do
 		local name = Sound_GameSystem_GetOutputDriverNameByIndex(index)
 		if F.Validator.IsNonEmptyString(name) then
@@ -100,4 +104,20 @@ function M:SwitchDevice()
 
 	local nextConfigIndex = currentConfigIndex % #devices + 1
 	C_CVar.SetCVar("Sound_OutputDriverIndex", devices[nextConfigIndex].cvarIndex)
+end
+
+function M:AutoResetPrimaryDevice()
+	if Sound_GameSystem_GetNumOutputDrivers() < 3 then
+		return
+	end
+
+	self:Debug("Auto-resetting to primary audio device.")
+
+	C_CVar.SetCVar("Sound_OutputDriverIndex", 1)
+	RunNextFrame(function()
+		C_CVar.SetCVar("Sound_OutputDriverIndex", 2)
+		RunNextFrame(function()
+			C_CVar.SetCVar("Sound_OutputDriverIndex", 0)
+		end)
+	end)
 end

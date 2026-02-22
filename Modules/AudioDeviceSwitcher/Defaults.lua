@@ -24,6 +24,8 @@ local defaults = {
 				height = 13,
 			},
 		},
+		mode = "manual",
+		autoResetOnEnter = false,
 		devices = { M.defaultDeviceSetting },
 	},
 }

@@ -96,6 +96,16 @@ function M:UpdateButtonVisibility()
 end
 
 function M:UpdateUI()
+	if self.profile.mode == "alwaysPrimary" then
+		if self:IsHooked("Sound_GameSystem_RestartSoundSystem") then
+			self:Unhook("Sound_GameSystem_RestartSoundSystem")
+		end
+		if self.UI.Button then
+			self.UI.Button:Hide()
+		end
+		return
+	end
+
 	if not self:IsHooked("Sound_GameSystem_RestartSoundSystem") then
 		self:SecureHook("Sound_GameSystem_RestartSoundSystem", "UpdateButtonText")
 	end

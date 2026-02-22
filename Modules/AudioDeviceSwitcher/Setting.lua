@@ -158,11 +158,68 @@ end
 M.RebuildDeviceSettings = RebuildDeviceArgs
 
 local settings = {
-	notice = {
+	mode = {
 		order = 3,
+		type = "select",
+		name = L["Mode"],
+		width = "full",
+		values = {
+			manual = L["Manual Switch"],
+			alwaysPrimary = L["Always Primary Device"],
+		},
+		get = function()
+			return M.profile.mode
+		end,
+		set = function(_, value)
+			M.profile.mode = value
+			M:ApplyMode()
+			M:UpdateUI()
+			E:RefreshSettings()
+		end,
+	},
+	alwaysPrimaryDesc = {
+		order = 4,
 		type = "group",
 		inline = true,
 		name = " ",
+		hidden = function()
+			return M.profile.mode ~= "alwaysPrimary"
+		end,
+		args = {
+			desc = {
+				order = 1,
+				type = "description",
+				name = string.format(
+					"%s\n\n%s %s\n\n%s %s",
+					L["Automatically resets to the primary audio device when audio devices change."],
+					F.Color.String(L["Warning"] .. ":", "yellow-500"),
+					L["The reset will cause 2-3 seconds of game freeze while the sound system restarts. This is unavoidable due to how the game handles audio device changes."],
+					F.Color.String(L["Tip"] .. ":", "cyan-500"),
+					L["If your audio device frequently disconnects and reconnects, consider using the manual mode instead to avoid frequent freezes."]
+				),
+			},
+			autoResetOnEnter = {
+				order = 2,
+				type = "toggle",
+				name = L["Reset on Enter World"],
+				desc = L["Automatically reset to the primary audio device when entering the world. This may slightly increase loading screen time."],
+				get = function()
+					return M.profile.autoResetOnEnter
+				end,
+				set = function(_, value)
+					M.profile.autoResetOnEnter = value
+				end,
+			},
+		},
+	},
+	notice = {
+		order = 5,
+		type = "group",
+		inline = true,
+		name = " ",
+		hidden = function()
+			return M.profile.mode ~= "manual"
+		end,
 		args = {
 			desc = {
 				order = 1,
@@ -177,6 +234,9 @@ local settings = {
 	},
 	ui = {
 		order = 11,
+		hidden = function()
+			return M.profile.mode ~= "manual"
+		end,
 		type = "group",
 		name = L["UI"],
 		args = {
@@ -267,6 +327,9 @@ local settings = {
 		type = "group",
 		name = L["Devices"],
 		childGroups = "tab",
+		hidden = function()
+			return M.profile.mode ~= "manual"
+		end,
 		args = deviceArgs,
 	},
 }
