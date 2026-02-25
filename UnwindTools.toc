@@ -19,8 +19,8 @@
 ## X-Curse-Project-ID: 1462042
 ## X-Wago-ID: x618OxN1
 
-Media\!Load.xml
 Libraries\!Load.xml
+Media\!Load.xml
 Locales\!Load.xml
 Core\!Load.xml
 
