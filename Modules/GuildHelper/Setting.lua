@@ -3,6 +3,74 @@ local E, F, L = ns[1], ns[2], ns[3]
 
 local M = E:Module("Guild Helper") ---@class GuildHelper
 
+---Get current guild name
+---@return string?
+local function getCurrentGuildName()
+	return (GetGuildInfo("player"))
+end
+
+---Build guild rank key in format {GUILD_NAME}_{RANK_NAME}
+---@param guildName string
+---@param rankName string
+---@return string
+local function buildGuildRankKey(guildName, rankName)
+	return guildName .. "_" .. rankName
+end
+
+---Set the input as a multiselect for guild ranks
+---@param args table The args table to modify
+---@param getConfigTable fun(): string[] Function that returns the config table storing "{GUILD_NAME}_{RANK_NAME}" strings
+local function setGuildRankMultiselect(args, getConfigTable)
+	args.type = "multiselect"
+	args.disabled = function()
+		return not getCurrentGuildName()
+	end
+	args.values = function()
+		local t = {}
+		if not getCurrentGuildName() then
+			return t
+		end
+		local numRanks = GuildControlGetNumRanks()
+		if numRanks and numRanks > 0 then
+			for i = 1, numRanks do
+				local rankName = GuildControlGetRankName(i)
+				if rankName and rankName ~= "" then
+					t[rankName] = rankName
+				end
+			end
+		end
+		return t
+	end
+	args.get = function(_, key)
+		local guildName = getCurrentGuildName()
+		if not guildName then
+			return false
+		end
+		local fullKey = buildGuildRankKey(guildName, key)
+		return tContains(getConfigTable(), fullKey)
+	end
+	args.set = function(_, key, value)
+		local guildName = getCurrentGuildName()
+		if not guildName then
+			return
+		end
+		local tbl = getConfigTable()
+		local fullKey = buildGuildRankKey(guildName, key)
+		if value then
+			if not tContains(tbl, fullKey) then
+				table.insert(tbl, fullKey)
+			end
+		else
+			for i, v in ipairs(tbl) do
+				if v == fullKey then
+					table.remove(tbl, i)
+					break
+				end
+			end
+		end
+	end
+end
+
 local settings = {
 	ui = {
 		order = 11,
@@ -212,9 +280,15 @@ local settings = {
 					},
 					guildRanks = {
 						order = 4,
-						type = "input",
-						name = L["Protected Guild Ranks"],
-						desc = L["Guild rank names to protect, separated by commas."],
+						name = function()
+							local guildName = getCurrentGuildName()
+							return string.format(
+								"%s (%s)",
+								L["Protected Guild Ranks"],
+								guildName or F.Color.String(L["You are not in a guild"], "rose-600")
+							)
+						end,
+						desc = L["Select guild ranks to protect from being kicked."],
 						width = "full",
 						hidden = function()
 							return not M.profile.kick.protection.enabled
@@ -425,9 +499,15 @@ local settings = {
 							},
 							ranks = {
 								order = 2,
-								type = "input",
-								name = L["Guild Ranks"],
-								desc = L["Guild rank names to target, separated by commas."],
+								name = function()
+									local guildName = getCurrentGuildName()
+									return string.format(
+										"%s (%s)",
+										L["Guild Ranks"],
+										guildName or F.Color.String(L["You are not in a guild"], "rose-600")
+									)
+								end,
+								desc = L["Select guild ranks to apply kick rules."],
 								width = "full",
 								hidden = function()
 									return not M.profile.kick.rules.guildRank.enabled
@@ -469,16 +549,16 @@ E:SetStringListSetting(settings.invite.args.channels, function()
 	return M.profile.invite.channels
 end)
 
-E:SetStringListSetting(settings.kick.args.protection.args.guildRanks, function()
-	return M.profile.kick.protection.guildRanks
+setGuildRankMultiselect(settings.kick.args.protection.args.guildRanks, function()
+	return M.profile.kick.protection.selectedRanks
 end)
 
 E:SetStringListSetting(settings.kick.args.rules.args.noteMark.args.patterns, function()
 	return M.profile.kick.rules.noteMark.patterns
 end)
 
-E:SetStringListSetting(settings.kick.args.rules.args.guildRank.args.ranks, function()
-	return M.profile.kick.rules.guildRank.ranks
+setGuildRankMultiselect(settings.kick.args.rules.args.guildRank.args.ranks, function()
+	return M.profile.kick.rules.guildRank.selectedRanks
 end)
 
 M:SetSettings(settings)

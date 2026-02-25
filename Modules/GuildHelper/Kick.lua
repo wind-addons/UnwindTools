@@ -74,8 +74,14 @@ local function IsProtected(publicNote, officerNote, rankName)
 		return true
 	end
 
-	if rankName and tContains(protection.guildRanks, rankName) then
-		return true
+	if rankName then
+		local guildName = GetGuildInfo("player")
+		if guildName then
+			local fullKey = guildName .. "_" .. rankName
+			if tContains(protection.selectedRanks, fullKey) then
+				return true
+			end
+		end
 	end
 
 	return false
@@ -91,8 +97,14 @@ end
 local function MatchesKickRule(rankName, level, offlineHours, publicNote, officerNote)
 	local rules = M.profile.kick.rules
 
-	if rules.guildRank.enabled and rankName and tContains(rules.guildRank.ranks, rankName) then
-		return true
+	if rules.guildRank.enabled and rankName then
+		local guildName = GetGuildInfo("player")
+		if guildName then
+			local fullKey = guildName .. "_" .. rankName
+			if tContains(rules.guildRank.selectedRanks, fullKey) then
+				return true
+			end
+		end
 	end
 
 	if

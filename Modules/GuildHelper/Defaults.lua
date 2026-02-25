@@ -38,7 +38,7 @@ local defaults = {
 				enabled = true,
 				hasPublicNote = true,
 				hasOfficerNote = true,
-				guildRanks = {}, ---@type string[]
+				selectedRanks = {}, ---@type string[]
 			},
 			rules = {
 				levelRange = {
@@ -57,7 +57,7 @@ local defaults = {
 				},
 				guildRank = {
 					enabled = true,
-					ranks = { L["Newcome"] },
+					selectedRanks = {}, ---@type string[]
 				},
 			},
 		},
