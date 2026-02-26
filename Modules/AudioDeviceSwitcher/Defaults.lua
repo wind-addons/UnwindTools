@@ -26,7 +26,7 @@ local defaults = {
 		},
 		mode = "alwaysPrimary",
 		autoResetOnEnter = false,
-		devices = { M.defaultDeviceSetting },
+		devices = { CopyTable(M.defaultDeviceSetting) },
 	},
 }
 

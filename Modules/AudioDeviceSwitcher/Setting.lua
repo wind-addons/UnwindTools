@@ -59,7 +59,7 @@ local function RebuildDeviceArgs()
 		type = "execute",
 		name = L["Add Device"],
 		func = function()
-			table.insert(M.profile.devices, M.defaultDeviceSetting)
+			table.insert(M.profile.devices, CopyTable(M.defaultDeviceSetting))
 			RebuildDeviceArgs()
 			E:RefreshSettings()
 		end,
