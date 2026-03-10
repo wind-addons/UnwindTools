@@ -26,6 +26,7 @@ L["Device Name Pattern"] = true
 L["Devices"] = true
 L["Display Name"] = true
 L["Double click to collapse/expand the buttons."] = true
+L["Duplicate keybindings: %s"] = true
 L["Enable"] = "Habilitar"
 L["Enable Protection"] = true
 L["Enable or disable %s."] = true
@@ -46,6 +47,7 @@ L["If any of the enabled rules are met, the target will be considered to be kick
 L["If your audio device frequently disconnects and reconnects, consider using the manual mode instead to avoid frequent freezes."] = true
 L["Invite"] = "Invitar"
 L["Invites Players"] = true
+L["Keybindings"] = true
 L["Kick"] = true
 L["Kick Rules"] = true
 L["Kick members offline for more than this many hours."] = true

@@ -28,6 +28,11 @@ local defaults = {
 					style = F.Font.DefaultStyle,
 					height = 13,
 				},
+				keybindings = {
+					invite = "",
+					refreshKick = "",
+					kick = "",
+				},
 			},
 		},
 		invite = {

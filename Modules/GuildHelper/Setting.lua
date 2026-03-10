@@ -206,6 +206,78 @@ local settings = {
 							M:UpdateUI()
 						end,
 					},
+					keybindings = {
+						order = 10,
+						type = "group",
+						name = L["Keybindings"],
+						inline = true,
+						args = {
+							duplicateWarning = {
+								order = 0,
+								type = "description",
+								name = function()
+									local kb = M.profile.ui.button.keybindings
+									local keys = {}
+									local duplicates = {}
+									for name, key in pairs(kb) do
+										if key and key ~= "" then
+											if keys[key] then
+												table.insert(duplicates, key)
+											else
+												keys[key] = name
+											end
+										end
+									end
+									if #duplicates > 0 then
+										return F.Color.String(
+											string.format(
+												L["Duplicate keybindings: %s"],
+												table.concat(duplicates, ", ")
+											),
+											"rose-500"
+										)
+									end
+									return ""
+								end,
+							},
+							invite = {
+								order = 1,
+								type = "keybinding",
+								name = L["Invite"],
+								get = function()
+									return M.profile.ui.button.keybindings.invite
+								end,
+								set = function(_, value)
+									M.profile.ui.button.keybindings.invite = value
+									M:UpdateBindings()
+								end,
+							},
+							refreshKick = {
+								order = 2,
+								type = "keybinding",
+								name = L["Refresh Kick List"],
+								get = function()
+									return M.profile.ui.button.keybindings.refreshKick
+								end,
+								set = function(_, value)
+									M.profile.ui.button.keybindings.refreshKick = value
+									M:UpdateBindings()
+								end,
+							},
+							kick = {
+								order = 3,
+								type = "keybinding",
+								name = L["Kick"],
+								get = function()
+									return M.profile.ui.button.keybindings.kick
+								end,
+								set = function(_, value)
+									M.profile.ui.button.keybindings.kick = value
+									M:UpdateBindings()
+								end,
+							},
+						},
+					},
 				},
 			},
 		},

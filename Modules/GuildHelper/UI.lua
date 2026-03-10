@@ -118,10 +118,15 @@ function M.UpdateRefreshKickButton()
 	assert(M.UI.InviteButton, "InviteButton must be created before RefreshKickButton")
 
 	if not M.UI.RefreshKickButton then
-		local button =
-			CreateFrame("Button", E.name .. "GuildHelperRefreshKickButton", M.UI.Container, "SharedButtonTemplate")
-		button:RegisterForClicks("AnyUp")
+		local button = CreateFrame(
+			"Button",
+			E.name .. "GuildHelperRefreshKickButton",
+			M.UI.Container,
+			"SharedButtonTemplate, SecureActionButtonTemplate"
+		)
+		button:RegisterForClicks("AnyUp", "AnyDown")
 		button:SetText(L["Refresh Kick List"])
+		button:SetAttribute("type*", "macro")
 
 		button:SetScript("OnEnter", function()
 			if not M.profile.ui.general.showTooltip then
@@ -135,14 +140,12 @@ function M.UpdateRefreshKickButton()
 		button:SetScript("OnLeave", function()
 			GameTooltip:Hide()
 		end)
-		button:SetScript("OnClick", function()
-			M.KickManager:FullyRefresh()
-			M.KickManager:UpdateButtonState()
-		end)
+		button:SetAttribute("type*", "macro")
+		button:SetAttribute("macrotext1", E:GetCallbackMacroLine("GHREFRESHKICKCLK"))
 
 		S:Button(button, { shadow = false, template = "Default" })
 
-		M.UI.RefreshKickButton = button
+		M.UI.RefreshKickButton = button --[[@as SecureActionButtonTemplate]]
 	end
 
 	M.UI.RefreshKickButton:SetSize(M.profile.ui.general.width - 4 * 2, M.profile.ui.button.height)

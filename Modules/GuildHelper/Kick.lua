@@ -161,8 +161,15 @@ function Manager:GetCurrentList()
 	return self.CurrentList
 end
 
+local RefreshCallbackMessage = "GHREFRESHKICKCLK"
+
 E:RegisterCallback(Manager.CallbackMessage, function()
 	wipe(Manager.CurrentList)
+	Manager:UpdateButtonState()
+end)
+
+E:RegisterCallback(RefreshCallbackMessage, function()
+	Manager:FullyRefresh()
 	Manager:UpdateButtonState()
 end)
 

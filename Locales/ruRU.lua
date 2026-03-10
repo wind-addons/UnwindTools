@@ -26,6 +26,7 @@ L["Device Name Pattern"] = "Шаблон имени устройства"
 L["Devices"] = "Устройства"
 L["Display Name"] = "Отображаемое имя"
 L["Double click to collapse/expand the buttons."] = "Дважды щёлкните, чтобы свернуть/развернуть кнопки."
+L["Duplicate keybindings: %s"] = true
 L["Enable"] = "Включить"
 L["Enable Protection"] = "Включить защиту"
 L["Enable or disable %s."] = "Включить или отключить %s."
@@ -46,6 +47,7 @@ L["If any of the enabled rules are met, the target will be considered to be kick
 L["If your audio device frequently disconnects and reconnects, consider using the manual mode instead to avoid frequent freezes."] = "Если Ваше аудиоустройство часто отключается и подключается заново, попробуйте использовать ручной режим, чтобы избежать частых зависаний."
 L["Invite"] = "Пригласить"
 L["Invites Players"] = "Приглашает игроков"
+L["Keybindings"] = true
 L["Kick"] = "Исключить"
 L["Kick Rules"] = "Правила исключения"
 L["Kick members offline for more than this many hours."] = "Исключать участников, которые 'не в сети' дольше указанного количества часов."
