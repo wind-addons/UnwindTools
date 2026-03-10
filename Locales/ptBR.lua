@@ -47,6 +47,7 @@ L["If any of the enabled rules are met, the target will be considered to be kick
 L["If your audio device frequently disconnects and reconnects, consider using the manual mode instead to avoid frequent freezes."] = true
 L["Invite"] = true
 L["Invites Players"] = true
+L["Keybinding"] = true
 L["Keybindings"] = true
 L["Kick"] = true
 L["Kick Rules"] = true

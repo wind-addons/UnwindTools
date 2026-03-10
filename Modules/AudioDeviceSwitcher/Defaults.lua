@@ -23,6 +23,7 @@ local defaults = {
 				style = F.Font.DefaultStyle,
 				height = 13,
 			},
+			keybinding = "",
 		},
 		mode = "alwaysPrimary",
 		autoResetOnEnter = false,

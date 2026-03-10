@@ -8,11 +8,31 @@ function M:OnInitialize()
 	self.RebuildDeviceSettings()
 end
 
+function M:UpdateBindings()
+	if not self.bindingOwner then
+		return
+	end
+
+	ClearOverrideBindings(self.bindingOwner)
+
+	if self.profile.mode ~= "manual" then
+		return
+	end
+
+	local key = self.profile.ui.keybinding
+	if key and key ~= "" and self.UI.Button then
+		SetOverrideBindingClick(self.bindingOwner, true, key, self.UI.Button:GetName())
+	end
+end
+
 function M:OnEnable()
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
 	self:ApplyMode()
 
 	self:UpdateUI()
+
+	self.bindingOwner = CreateFrame("Frame")
+	self:UpdateBindings()
 
 	self:Debug("Module enabled.")
 end
@@ -26,6 +46,11 @@ function M:OnDisable()
 		self.UI.Button:Hide()
 	end
 
+	if self.bindingOwner then
+		ClearOverrideBindings(self.bindingOwner)
+		self.bindingOwner = nil
+	end
+
 	self:Debug("Module disabled.")
 end
 
@@ -33,6 +58,7 @@ function M:OnProfileChanged()
 	self.RebuildDeviceSettings()
 	self:ApplyMode()
 	self:UpdateUI()
+	self:UpdateBindings()
 end
 
 ---Register or unregister events based on the current mode.

@@ -318,6 +318,18 @@ local settings = {
 							M.profile.ui.general.showTooltip = value
 						end,
 					},
+					keybinding = {
+						order = 6,
+						type = "keybinding",
+						name = L["Keybinding"],
+						get = function()
+							return M.profile.ui.keybinding
+						end,
+						set = function(_, value)
+							M.profile.ui.keybinding = value
+							M:UpdateBindings()
+						end,
+					},
 				},
 			},
 		},

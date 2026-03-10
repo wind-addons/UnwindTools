@@ -47,6 +47,7 @@ L["If any of the enabled rules are met, the target will be considered to be kick
 L["If your audio device frequently disconnects and reconnects, consider using the manual mode instead to avoid frequent freezes."] = "如果您的音訊裝置頻繁斷開和重新連接, 請考慮使用手動模式以避免頻繁卡頓."
 L["Invite"] = "邀請"
 L["Invites Players"] = "邀請玩家"
+L["Keybinding"] = "按鍵綁定"
 L["Keybindings"] = "按鍵綁定"
 L["Kick"] = "踢出"
 L["Kick Rules"] = "踢出規則"
