@@ -1,6 +1,6 @@
 ## Interface: 120001
 ## Author: fang2hou
-## Version: 0.3.0
+## Version: 0.3.1
 ## Title: |cff5485EDU|r|cff528FEBn|r|cff5098E9w|r|cff4EA2E8i|r|cff4CABE6n|r|cff4AB5E4d|r|cff48BCE3T|r|cff47C3E1o|r|cff45C9E0o|r|cff44D0DEl|r|cff42D7DDs|r
 ## Title-zhCN: |cff5485EDU|r|cff5290EBn|r|cff509AE9w|r|cff4DA5E7i|r|cff4BB0E5n|r|cff49B9E3d|r|cff47C0E2 |r|cff46C8E0工|r|cff44CFDF具|r|cff42D7DD箱|r
 ## Title-zhTW: |cff5485EDU|r|cff5290EBn|r|cff509AE9w|r|cff4DA5E7i|r|cff4BB0E5n|r|cff49B9E3d|r|cff47C0E2 |r|cff46C8E0工|r|cff44CFDF具|r|cff42D7DD箱|r
