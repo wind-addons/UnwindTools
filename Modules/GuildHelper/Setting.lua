@@ -416,7 +416,7 @@ local settings = {
 								name = L["Min Level"],
 								desc = L["Minimum level to kick."],
 								min = 1,
-								max = 80,
+								max = 90,
 								step = 1,
 								get = function()
 									return M.profile.kick.rules.levelRange.minLevel
@@ -434,7 +434,7 @@ local settings = {
 								name = L["Max Level"],
 								desc = L["Maximum level to kick."],
 								min = 1,
-								max = 80,
+								max = 90,
 								step = 1,
 								get = function()
 									return M.profile.kick.rules.levelRange.maxLevel
