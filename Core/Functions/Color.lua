@@ -503,6 +503,51 @@ local function IsUnderFF(n)
 	return type(n) == "number" and n >= 0 and n <= 255
 end
 
+local colorCache = {}
+
+---Create a ColorMixin from normalized values (0-1), with caching.
+---@param r number Red component (0-1)
+---@param g number Green component (0-1)
+---@param b number Blue component (0-1)
+---@param a number? Alpha component (0-1, default 1)
+---@return ColorMixin color
+function F.Color.CreateColor(r, g, b, a)
+	local br = math.floor(r * 255 + 0.5)
+	local bg = math.floor(g * 255 + 0.5)
+	local bb = math.floor(b * 255 + 0.5)
+	local ba = math.floor((a or 1) * 255 + 0.5)
+
+	local key = br .. ":" .. bg .. ":" .. bb .. ":" .. ba
+	local cached = colorCache[key]
+	if cached then
+		return cached
+	end
+
+	local color = CreateColorFromBytes(br, bg, bb, ba)
+	colorCache[key] = color
+	return color
+end
+
+---Create a ColorMixin from byte values (0-255), with caching.
+---@param r number Red component (0-255)
+---@param g number Green component (0-255)
+---@param b number Blue component (0-255)
+---@param a number? Alpha component (0-255, default 255)
+---@return ColorMixin color
+function F.Color.CreateColorFromBytes(r, g, b, a)
+	a = a or 255
+
+	local key = r .. ":" .. g .. ":" .. b .. ":" .. a
+	local cached = colorCache[key]
+	if cached then
+		return cached
+	end
+
+	local color = CreateColorFromBytes(r, g, b, a)
+	colorCache[key] = color
+	return color
+end
+
 ---Validate that a value is a valid RGBColor table
 ---@param value any The value to validate
 ---@return boolean isValid Whether the value is a valid RGBColor
@@ -531,22 +576,22 @@ function F.Color.Parse(color)
 		elseif color.r and color.g and color.b then
 			local r, g, b, a = color.r, color.g, color.b, color.a or 1
 			if r <= 1 and g <= 1 and b <= 1 then
-				return CreateColor(r, g, b, a)
+				return F.Color.CreateColor(r, g, b, a)
 			else
-				return CreateColorFromBytes(r, g, b, a * 255)
+				return F.Color.CreateColorFromBytes(r, g, b, a * 255)
 			end
 		elseif color[1] and color[2] and color[3] then
 			local r, g, b, a = color[1], color[2], color[3], color[4] or 1
 			if r <= 1 and g <= 1 and b <= 1 then
-				return CreateColor(r, g, b, a)
+				return F.Color.CreateColor(r, g, b, a)
 			else
-				return CreateColorFromBytes(r, g, b, a * 255)
+				return F.Color.CreateColorFromBytes(r, g, b, a * 255)
 			end
 		end
 	elseif type(color) == "string" then
 		local hex = TailwindColorTemplates[color] or color
 		local rgba = F.Color.HexToRGB(hex)
-		return CreateColorFromBytes(rgba.r, rgba.g, rgba.b, rgba.a)
+		return F.Color.CreateColorFromBytes(rgba.r, rgba.g, rgba.b, rgba.a)
 	end
 
 	error("Invalid color input: expected RGB/RGBA table, ColorMixin, ColorTemplate, or Hex string")
@@ -639,7 +684,8 @@ function F.Color.String(text, ...)
 
 		local sr, sg, sb = startColor:GetRGB()
 		local er, eg, eb = stopColor:GetRGB()
-		local midColor = CreateColor(sr + (er - sr) * segmentT, sg + (eg - sg) * segmentT, sb + (eb - sb) * segmentT)
+		local midColor =
+			F.Color.CreateColor(sr + (er - sr) * segmentT, sg + (eg - sg) * segmentT, sb + (eb - sb) * segmentT)
 
 		tAppendAll(result, { midColor:GenerateHexColorMarkup(), char, "|r" })
 	end
