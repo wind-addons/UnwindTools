@@ -14,9 +14,11 @@ local LSM = LibStub("LibSharedMedia-3.0")
 ---@cast F Functions
 
 ---Open the setting panel from the addon compartment click
-function UnwindTools_OnAddonCompartmentClick()
+local function OnAddonCompartmentClick()
 	ACD:Open(E.name)
 end
+
+_G[E.name .. "_OnAddonCompartmentClick"] = OnAddonCompartmentClick
 
 ---@alias SettingCategory "general"|"system"|"social"
 ---@type table<SettingCategory, { order: number, name: string, gradientColorTemplates: ColorTemplate[] }>
@@ -43,7 +45,7 @@ local blizOptions = {
 			name = L["Open Settings"],
 			type = "execute",
 			func = function()
-				UnwindTools_OnAddonCompartmentClick()
+				OnAddonCompartmentClick()
 			end,
 			order = 1,
 		},
@@ -174,7 +176,7 @@ function E:BuildSettings()
 		text = self.title,
 		label = self.title,
 		icon = E.Texture.Logo,
-		OnClick = UnwindTools_OnAddonCompartmentClick,
+		OnClick = OnAddonCompartmentClick,
 		OnTooltipShow = function(tooltip)
 			tooltip:AddLine(self.title)
 			tooltip:AddLine(L["Click to toggle config window."])

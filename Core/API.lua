@@ -183,5 +183,5 @@ end
 ---@param message string The message to trigger
 ---@return string The macro line
 function E:GetCallbackMacroLine(message)
-	return string.format("/run UnwindTools[1]:Callback('%s')", message)
+	return string.format("/run %s[1]:Callback('%s')", E.name, message)
 end
